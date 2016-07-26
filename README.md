@@ -9,7 +9,7 @@ webpack是近期最火的一款模块加载器兼打包工具，它能把各种�
 ### require ###
 模块依赖，一招搞定
 
-    require("./lib.js");
+	require("./lib.js");
 	require("./style.css");
 	require("./style.less");
 	require("./template.jade");
@@ -21,17 +21,17 @@ webpack是近期最火的一款模块加载器兼打包工具，它能把各种�
 对应各种不同文件类型的资源，Webpack有对应的模块loader
 
 	module: {
-	    //加载器配置
-	    loaders: [
-	        //.css 文件使用 style-loader 和 css-loader 来处理
-	        { test: /\.css$/, loader: 'style-loader!css-loader' },
-	        //.js 文件使用 jsx-loader 来编译处理
-	        { test: /\.js$/, loader: 'jsx-loader?harmony' },
-	        //.scss 文件使用 style-loader、css-loader 和 sass-loader 来编译处理
-	        { test: /\.scss$/, loader: 'style!css!sass?sourceMap'},
-	        //图片文件使用 url-loader 来处理，小于8kb的直接转为base64
-	        { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}
-	    ]
+		//加载器配置
+		loaders: [
+			//.css 文件使用 style-loader 和 css-loader 来处理
+			{ test: /\.css$/, loader: 'style-loader!css-loader' },
+			//.js 文件使用 jsx-loader 来编译处理
+			{ test: /\.js$/, loader: 'jsx-loader?harmony' },
+			//.scss 文件使用 style-loader、css-loader 和 sass-loader 来编译处理
+			{ test: /\.scss$/, loader: 'style!css!sass?sourceMap'},
+			//图片文件使用 url-loader 来处理，小于8kb的直接转为base64
+			{ test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}
+		]
 	}
 
 ## webpack的优势 ##
@@ -43,27 +43,27 @@ webpack是近期最火的一款模块加载器兼打包工具，它能把各种�
 以 AMD/CMD 模式来说，鉴于模块是异步加载的，所以我们常规需要使用 define 函数来帮我们搞回调：
 
 	define(['package/lib'], function(lib){
-	    function foo(){
-	        lib.log('hello world!');
-	    } 
-	    return {
-	        foo: foo
-	    };
+		function foo(){
+			lib.log('hello world!');
+		} 
+		return {
+			foo: foo
+		};
 	});
 
 另外为了可以兼容 commonJS 的写法，我们也可以将 define 这么写：
 
 	define(function (require, exports, module){
-	    var module1 = require("module1");
-	    var module2 = require("module2");    
+		var module1 = require("module1");
+		var module2 = require("module2");    
 	 
-	    module1.sayHello();
-	    module2.sayHi();
+		module1.sayHello();
+		module2.sayHi();
 	 
-	    exports.helloWorld = function (){
-	        module1.sayHello();
-	        module2.sayHi();
-	    };
+		exports.helloWorld = function (){
+			module1.sayHello();
+			module2.sayHi();
+		};
 	});
 
 然而对 webpack 来说，我们可以直接在上面书写 commonJS 形式的语法，无须任何 define （毕竟最终模块都打包在一起，webpack 也会最终自动加上自己的加载器）：
@@ -86,7 +86,7 @@ webpack是近期最火的一款模块加载器兼打包工具，它能把各种�
 首先确保机子上已安装node.js，然后通过npm安装webpack
 
 ```$
-	npm install webpack -g
+npm install webpack -g
 ```
 
 ### 启动命令 ###
@@ -94,11 +94,11 @@ webpack是近期最火的一款模块加载器兼打包工具，它能把各种�
 切换到有 webpack.config.js 的目录然后运行
 
 ```$
-	webpack     // 执行一次开发的编译
-	webpack -p  // 针对发布环境编译(压缩代码)
-	webpack -w  // 进行开发过程持续的增量编译(飞快地!)
-	webpack -d  // 生成map映射文件，告知哪些模块被最终打包到哪里了
-	webpack --config XXX.js   //使用另一份配置文件（比如webpack.config2.js）来打包
+webpack     // 执行一次开发的编译
+webpack -p  // 针对发布环境编译(压缩代码)
+webpack -w  // 进行开发过程持续的增量编译(飞快地!)
+webpack -d  // 生成map映射文件，告知哪些模块被最终打包到哪里了
+webpack --config XXX.js   //使用另一份配置文件（比如webpack.config2.js）来打包
 ```
 
 ### 配置文件(webpack.config.js) ###
@@ -127,73 +127,73 @@ webpack是近期最火的一款模块加载器兼打包工具，它能把各种�
 	var HtmlWebpackPlugin = require('html-webpack-plugin'); // Html文件处理
 	
 	module.exports = {
-	    entry: {
-	        Detail: './modules/app/detail.js',
-	        Home: './modules/app/home.js'
-	    },
-	    output: {
-	        path: './build', // This is where images & js will go
-	        //publicPath: 'http://m.pp.cn/ppaweb/test/build/', // This is used to generate URLs to e.g. images
-	        publicPath: '/ppaweb/example/build/', // This is used to generate URLs to e.g. images
-	        filename: '[name].js',
-	        chunkFilename: "[id].chunk.js?[hash:8]"
-	    },
-	    plugins: [
-	        commonsPlugin,
-	        new ExtractTextPlugin('[name].css', {allChunks: true}), // 单独打包CSS
+		entry: {
+			Detail: './modules/app/detail.js',
+			Home: './modules/app/home.js'
+		},
+		output: {
+			path: './build', // This is where images & js will go
+			//publicPath: 'http://m.pp.cn/ppaweb/test/build/', // This is used to generate URLs to e.g. images
+			publicPath: '/ppaweb/example/build/', // This is used to generate URLs to e.g. images
+			filename: '[name].js',
+			chunkFilename: "[id].chunk.js?[hash:8]"
+		},
+		plugins: [
+			commonsPlugin,
+			new ExtractTextPlugin('[name].css', {allChunks: true}), // 单独打包CSS
 	
-	        // 全局变量
-	        new webpack.DefinePlugin({
-	            //__DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV||'false')) //通过环境变量设置
-	            __DEV__: 'false' // 开发调试时把它改为true
-	        }),
+			// 全局变量
+			new webpack.DefinePlugin({
+				//__DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV||'false')) //通过环境变量设置
+				__DEV__: 'false' // 开发调试时把它改为true
+			}),
 	
-	        /**
-	         * HTML文件编译，自动引用JS/CSS
-	         * 
-	         * filename - 输出文件名，相对路径output.path
-	         * template - HTML模板，相对配置文件目录
-	         * chunks - 只包含指定的文件（打包后输出的JS/CSS）,不指定的话，它会包含生成的所有js和css文件
-	         * excludeChunks - 排除指定的文件（打包后输出的JS/CSS），比如：excludeChunks: ['dev-helper']
-	         * hash
-	         */
-	        new HtmlWebpackPlugin({filename: 'views/home.html', template: 'views/home.html', chunks: ['common', 'Home'], hash: true}),
-	        new HtmlWebpackPlugin({filename: 'views/detail.html', template: 'views/detail.html', chunks: ['common', 'Detail'], hash: true})
-	    ],
+			/**
+			* HTML文件编译，自动引用JS/CSS
+			* 
+			* filename - 输出文件名，相对路径output.path
+			* template - HTML模板，相对配置文件目录
+			* chunks - 只包含指定的文件（打包后输出的JS/CSS）,不指定的话，它会包含生成的所有js和css文件
+			* excludeChunks - 排除指定的文件（打包后输出的JS/CSS），比如：excludeChunks: ['dev-helper']
+			* hash
+			*/
+			new HtmlWebpackPlugin({filename: 'views/home.html', template: 'views/home.html', chunks: ['common', 'Home'], hash: true}),
+			new HtmlWebpackPlugin({filename: 'views/detail.html', template: 'views/detail.html', chunks: ['common', 'Detail'], hash: true})
+		],
 	
-	    module: {
-	        loaders: [
-	            {
-	                test: /\.js$/, loader: 'babel-loader', // ES6
-	                exclude: /(node_modules|bower_components|ppaweb\\libs\\webpack)/
-	            },
-	            // CSS,LESS打包进JS
-	            { test: /\.css$/, loader: 'style-loader!css-loader' },
-	            { test: /\.less$/, loader: 'style-loader!css-loader!less-loader' }, // use ! to chain loaders
-	            // CSS,LESS单独打包
-	            //{ test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
-	            //{ test: /\.less$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader') },
-	
-	            { test: /\.tpl$/, loader: 'ejs'}, // artTemplate/ejs 's tpl
-	            {
-	                test: /\.(png|jpg|gif)$/,
-	                loader: 'url-loader',
-	                query: {
-	                    name: '[path][name].[ext]?[hash:8]',
-	                    limit: 8192 // inline base64 URLs for <=8k images, direct URLs for the rest
-	                }
-	            }
-	        ]
-	    },
-	    resolve: {
-	        alias: {
-	            'lib0': '../../../ppaweb/libs/webpack', // 从module调用webpack上的公共lib库路径简写
-	            'lib1': '../../../../ppaweb/libs/webpack', // 从module的子文件夹调用webpack上的公共lib库路径简写
-	            'lib2': '../../../../../ppaweb/libs/webpack' // 从module的两层子文件夹调用webpack上的公共lib库路径简写
-	        },
-	        // 现在可以写 require('file') 代替 require('file.coffee')
-	        extensions: ['', '.js', '.json', '.coffee']
-	    }
+		module: {
+			loaders: [
+				{
+					test: /\.js$/, loader: 'babel-loader', // ES6
+					exclude: /(node_modules|bower_components|ppaweb\\libs\\webpack)/
+				},
+				// CSS,LESS打包进JS
+				{ test: /\.css$/, loader: 'style-loader!css-loader' },
+				{ test: /\.less$/, loader: 'style-loader!css-loader!less-loader' }, // use ! to chain loaders
+				// CSS,LESS单独打包
+				//{ test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
+				//{ test: /\.less$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader') },
+		
+				{ test: /\.tpl$/, loader: 'ejs'}, // artTemplate/ejs 's tpl
+				{
+					test: /\.(png|jpg|gif)$/,
+					loader: 'url-loader',
+					query: {
+						name: '[path][name].[ext]?[hash:8]',
+						limit: 8192 // inline base64 URLs for <=8k images, direct URLs for the rest
+					}
+				}
+			]
+		},
+		resolve: {
+			alias: {
+				'lib0': '../../../ppaweb/libs/webpack', // 从module调用webpack上的公共lib库路径简写
+				'lib1': '../../../../ppaweb/libs/webpack', // 从module的子文件夹调用webpack上的公共lib库路径简写
+				'lib2': '../../../../../ppaweb/libs/webpack' // 从module的两层子文件夹调用webpack上的公共lib库路径简写
+			},
+			// 现在可以写 require('file') 代替 require('file.coffee')
+			extensions: ['', '.js', '.json', '.coffee']
+		}
 	};
 
 具体可以参考：[webpack-demo的配置项](https://github.com/diamont1001/webpack-demo/blob/master/example1/webpack.config.js)
@@ -212,12 +212,12 @@ webpack是近期最火的一款模块加载器兼打包工具，它能把各种�
 - 图片可能被转化成 base64 格式的 dataUrl
 
 ```
-	module: {
-		loaders: [
+module: {
+	loaders: [
 		//图片文件使用 url-loader 来处理，小于8kb的直接转为base64
 		{ test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}
-		]
-	}
+	]
+}
 ```
 
 ### LESS/CSS里:图片引用 ###
@@ -227,10 +227,10 @@ webpack是近期最火的一款模块加载器兼打包工具，它能把各种�
 根据配置“url-loader?limit=xxx”来决定把图片转换成base64还是图片链接形式引用。
 
 	module: {
-	    loaders: [
-	        //图片文件使用 url-loader 来处理，小于8kb的直接转为base64
-	        { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}
-	    ]
+		loaders: [
+			//图片文件使用 url-loader 来处理，小于8kb的直接转为base64
+			{ test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}
+		]
 	}
 
 ### LESS/CSS里：@import 路径问题 ###
@@ -239,12 +239,12 @@ LESS里可以通过`@import mixin.less`进行模块化开发，可以在import�
 `tnpm i @ali/pp-libs --save-dev`
 
 ```
-	# index.less
-	@import '@ali/pp-libs/libs/base/reset.less';
+# index.less
+@import '@ali/pp-libs/libs/base/reset.less';
 ```
 
 ### CSS能单独打包 ###
-有时候可能希望项目的样式能不要被打包到脚本中，而是独立出来作为.css，然后在页面中以<link>标签引入。这时候我们需要 extract-text-webpack-plugin 来帮忙。
+有时候可能希望项目的样式能不要被打包到脚本中，而是独立出来作为.css，然后在页面中以<link>标签引入。这时候我们需要 `extract-text-webpack-plugin` 来帮忙。
 
 只需两步：
 
@@ -255,20 +255,20 @@ LESS里可以通过`@import mixin.less`进行模块化开发，可以在import�
 2. 配置文件webpack.config.js
 
 ```
-	var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-	……
+……
 
-	plugins: [
-	    // 目标文件名规则[name].css
-	    new ExtractTextPlugin('[name].css', {allChunks: true})
-	],
-	module: {
-	    loaders: [
-	        { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
-	        { test: /\.less$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader') },
-	    ]
-	},
+plugins: [
+	// 目标文件名规则[name].css
+	new ExtractTextPlugin('[name].css', {allChunks: true})
+],
+module: {
+	loaders: [
+		{ test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
+		{ test: /\.less$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader') },
+	]
+},
 ```
 
 ### 公共代码自动抽离 ###
@@ -280,7 +280,7 @@ LESS里可以通过`@import mixin.less`进行模块化开发，可以在import�
 	var commonsPlugin = new webpack.optimize.CommonsChunkPlugin(/*chunkName=*/'common', /*filename=*/'common.js');
 	
 	plugins: [
-	    commonsPlugin
+		commonsPlugin
 	],
 
 记得要在HTML手动引入common.js
@@ -297,28 +297,28 @@ LESS里可以通过`@import mixin.less`进行模块化开发，可以在import�
 我们可以这样配：
 
 ```
-	module.exports = {
-	    entry: {
-	        A: "./a.js",
-	        B: "./b.js",
-	        C: "./c.js",
-	        D: "./d.js",
-			E: "./e.js"
-	    },
-	    output: {
-	        filename: "[name].js"
-	    },
-	    plugins: [
-	        new CommonsChunkPlugin("AC-commons.js", ["A", "C"]),
-	        new CommonsChunkPlugin("BD-commons.js", ["B", "D"])
-	    ]
-	};
-	// <script>s required:
-	// a.html: AC-commons.js, A.js
-	// b.html: BD-commons.js, B.js
-	// c.html: AC-commons.js, C.js
-	// d.html: BD-commons.js, D.js
-	// e.html: E.js
+module.exports = {
+	entry: {
+		A: "./a.js",
+		B: "./b.js",
+		C: "./c.js",
+		D: "./d.js",
+		E: "./e.js"
+	},
+	output: {
+		filename: "[name].js"
+		},
+	plugins: [
+		new CommonsChunkPlugin("AC-commons.js", ["A", "C"]),
+		new CommonsChunkPlugin("BD-commons.js", ["B", "D"])
+	]
+};
+// <script>s required:
+// a.html: AC-commons.js, A.js
+// b.html: BD-commons.js, B.js
+// c.html: AC-commons.js, C.js
+// d.html: BD-commons.js, D.js
+// e.html: E.js
 ```
 
 ### HTML自动引用 JS/CSS ###
@@ -327,26 +327,26 @@ LESS里可以通过`@import mixin.less`进行模块化开发，可以在import�
 `npm install html-webpack-plugin --save-dev`
 
 ```
-	var HtmlWebpackPlugin = require('html-webpack-plugin'); // Html文件处理
+var HtmlWebpackPlugin = require('html-webpack-plugin'); // Html文件处理
 
-	module.exports = {
+module.exports = {
 
-		……
+	……
 
-	    plugins: [
-	        /**
-	         * HTML文件编译，自动引用JS/CSS
-	         * 
-	         * filename - 输出文件名，相对路径output.path
-	         * template - HTML模板，相对配置文件目录
-	         * chunks - 只包含指定的文件（打包后输出的JS/CSS）,不指定的话，它会包含生成的所有js和css文件
-	         * excludeChunks - 排除指定的文件（打包后输出的JS/CSS），比如：excludeChunks: ['dev-helper']
-	         * hash
-	         */
-	        new HtmlWebpackPlugin({filename: 'views/list.html', template: 'src/modules/app/list/index.html', chunks: ['common', 'List'], hash: true}),
-	        new HtmlWebpackPlugin({filename: 'views/detail.html', template: 'src/modules/app/detail/index.html', chunks: ['common', 'Detail'], hash: true})
-	    ],
-	};
+	plugins: [
+		/**
+		* HTML文件编译，自动引用JS/CSS
+		* 
+		* filename - 输出文件名，相对路径output.path
+		* template - HTML模板，相对配置文件目录
+		* chunks - 只包含指定的文件（打包后输出的JS/CSS）,不指定的话，它会包含生成的所有js和css文件
+		* excludeChunks - 排除指定的文件（打包后输出的JS/CSS），比如：excludeChunks: ['dev-helper']
+		* hash
+		*/
+		new HtmlWebpackPlugin({filename: 'views/list.html', template: 'src/modules/app/list/index.html', chunks: ['common', 'List'], hash: true}),
+		new HtmlWebpackPlugin({filename: 'views/detail.html', template: 'src/modules/app/detail/index.html', chunks: ['common', 'Detail'], hash: true})
+	],
+};
 ```
 
 具体参考 [webpack-demo的配置项](https://github.com/diamont1001/webpack-demo/blob/master/example1/webpack.config.js)
@@ -355,24 +355,24 @@ LESS里可以通过`@import mixin.less`进行模块化开发，可以在import�
 有些代码我们只想在开发环境使用（比如log），这里，我们需要用到全局变量插件：webpack.DefinePlugin
 
 ```
-	module.exports = {
-		plugins: [
-			// 全局变量
-			new webpack.DefinePlugin({
-			  // __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false')), //通过环境变量设置
-			  __DEV__: JSON.stringify(JSON.parse('true')), // 开发调试时把它改为true
-			  __HELLO__: JSON.stringify('hello world')
-			})
-		]
-	};
+module.exports = {
+	plugins: [
+		// 全局变量
+		new webpack.DefinePlugin({
+			// __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false')), //通过环境变量设置
+			__DEV__: JSON.stringify(JSON.parse('true')), // 开发调试时把它改为true
+			__HELLO__: JSON.stringify('hello world')
+		})
+	]
+};
 ```
 
 js中调用
 
 ```
-	if(__DEV__) {
-	    console.log(__HELLO__);
-	}
+if(__DEV__) {
+	console.log(__HELLO__);
+}
 ```
 
 注意：webpack -p 会执行 uglify dead-code elimination, 任何这种代码都会被剔除, 所以你不用担心秘密功能泄漏.
@@ -383,9 +383,9 @@ js中调用
 
 语法：
 ```
-	require.ensure(dependencies: String[],
-                           callback: function([require]),
-                           [chunkName: String])
+require.ensure(dependencies: String[],
+		callback: function([require]),
+		[chunkName: String])
 ```
 
 与require AMD类似，也是在需要的时候才会加载相应的模块。但不同的是，require.ensure在模块被下载下来后（模块还没被执行）便立即执行回调函数.
@@ -395,15 +395,15 @@ js中调用
 
 	// 异步加载
 	if(i < 0) {
-	    require.ensure([], function() {
-	        require('a.js');
-	    });
+		require.ensure([], function() {
+			require('a.js');
+		});
 	}
 
 定义异步加载文件名字(webpack.config.js)
 
 	output: {
-	    chunkFilename: "[id].chunk.[hash:8].js"
+		chunkFilename: "[id].chunk.[hash:8].js"
 	},
 
 生成的异步文件引用逻辑自动包含在源目标JS中，不用手动引用，所以以上文件名随便怎么定义都不影响。
@@ -414,16 +414,16 @@ js中调用
 图片加载器url-loader其实是对file-loader的一个封装
 
 ```
-	loaders: [
-	    {
-	        test: /\.(png|jpg|gif)$/,
-	        loader: 'url-loader',
-	        query: {
-	            name: '[path][name].[ext]?[hash:8]',
-	            limit: 8192
-	        }
-	    }
-	]
+loaders: [
+	{
+		test: /\.(png|jpg|gif)$/,
+		loader: 'url-loader',
+		query: {
+			name: '[path][name].[ext]?[hash:8]',
+			limit: 8192
+		}
+	}
+]
 ```
 
 如果文件超出体积, 就给一个这样规则的文件名
@@ -434,12 +434,12 @@ js中调用
 ### ES6支持 ###
 
 	module: {
-	    loaders: [
-	        {
-	            test: /\.js$/, loader: 'babel-loader', // ES6
-	            exclude: /(node_modules|bower_components|ppaweb\\libs\\webpack)/
-	        },
-	    ]
+		loaders: [
+			{
+				test: /\.js$/, loader: 'babel-loader', // ES6
+				exclude: /(node_modules|bower_components|ppaweb\\libs\\webpack)/
+			},
+		]
 	},
 
 参考：[http://npm.taobao.org/package/babel-loader](http://npm.taobao.org/package/babel-loader)
@@ -448,27 +448,27 @@ js中调用
 webpack允许配置路径的别名，这样在一些外部资源的依赖的时候显得格外有用，对以后的项目迁移等都起到不小的作用。
 
 	resolve: {
-	    alias: {
-	        // 从module调用公共libs上的库路径简写
-	        'lib0': '../../../libs',
+		alias: {
+			// 从module调用公共libs上的库路径简写
+			'lib0': '../../../libs',
 	
-	        // 从module的子文件夹调用公共libs上的库路径简写
-	        'lib1': '../../../../libs', 
+			// 从module的子文件夹调用公共libs上的库路径简写
+			'lib1': '../../../../libs', 
 	
-	        // 从module的两层子文件夹调用公共libs上的库路径简写
-	        'lib2': '../../../../../libs' 
-	    }
+			// 从module的两层子文件夹调用公共libs上的库路径简写
+			'lib2': '../../../../../libs' 
+		}
 	}
 
 ```
-	# module/index.js
-	require('lib0/proxy');
+# module/index.js
+require('lib0/proxy');
 
-	# module/app/index.js
-	require('lib1/proxy');
+# module/app/index.js
+require('lib1/proxy');
 
-	# module/app/header/index.js
-	require('lib2/proxy');
+# module/app/header/index.js
+require('lib2/proxy');
 ```
 
 ### shimming ###
@@ -483,28 +483,28 @@ webpack允许配置路径的别名，这样在一些外部资源的依赖的时�
 
 ## Webpack模块编写 ##
 ### 模块框架 ###
-// var $ = require('zepto');
-// require('./index.less');
+
+	// var $ = require('zepto');
+	// require('./index.less');
 
 	!(function () {
 	
-	    var module1 = (function () {
-	        var _e = {};
-	
-	        _e.test = function () {
-	            // do something here
-	        };
-	
-	        return _e;
-	    })();
-	
-	
-	    window.module1 = module1;
-	
-	    try {
-	        module.exports = module1;
-	    } catch (e) {}
-	
+		var module1 = (function () {
+			var _e = {};
+		
+			_e.test = function () {
+				// do something here
+			};
+		
+			return _e;
+		})();
+
+		window.module1 = module1;
+		
+		try {
+			module.exports = module1;
+		} catch (e) {}
+
 	})();
 
 ## 旧项目迁移方案 ##
