@@ -100,14 +100,6 @@ webpack -w  // 进行开发过程持续的增量编译(飞快地!)
 webpack -d  // 生成map映射文件，告知哪些模块被最终打包到哪里了
 webpack --config XXX.js   //使用另一份配置文件（比如webpack.config2.js）来打包
 ```
-
-### 配置文件(webpack.config.js) ###
-每个项目下都必须配置有一个 webpack.config.js
-- plugins 插件项
-- entry 页面入口文件配置
-- output 对应输出项配置（即入口文件最终要生成什么名字的文件、存放到哪里）
-- module.loaders 最关键的一块，配置每一种文件需要使用什么加载器来处理（多个loader之间用"!"连接）
-
 #### 插件的安装 ###
 所有的加载器都需要通过 npm 来加载，并建议查阅它们对应的 readme 来看看如何使用
 
@@ -117,6 +109,13 @@ webpack --config XXX.js   //使用另一份配置文件（比如webpack.config2.
 
 	npm init
 	npm install url-loader --save-dev
+
+### 配置文件(webpack.config.js) ###
+每个项目下都必须配置有一个 webpack.config.js
+- plugins 插件项
+- entry 页面入口文件配置
+- output 对应输出项配置（即入口文件最终要生成什么名字的文件、存放到哪里）
+- module.loaders 最关键的一块，配置每一种文件需要使用什么加载器来处理（多个loader之间用"!"连接）
 
 ### 通用配置文件例子 ###
 
@@ -233,7 +232,7 @@ module: {
 		]
 	}
 
-### LESS/CSS里：@import 路径问题 ###
+### LESS/CSS里：@ import 路径问题 ###
 LESS里可以通过`@import mixin.less`进行模块化开发，可以在import的路径前面加上~，表示路径以模块处理，支持alias。
 
 `tnpm i @ali/pp-libs --save-dev`
@@ -313,6 +312,7 @@ module.exports = {
 		new CommonsChunkPlugin("BD-commons.js", ["B", "D"])
 	]
 };
+
 // <script>s required:
 // a.html: AC-commons.js, A.js
 // b.html: BD-commons.js, B.js
