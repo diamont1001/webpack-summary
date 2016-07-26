@@ -144,18 +144,6 @@ webpack -d  // 生成map映射文件，告知哪些模块被最终打包到哪�
 webpack --config XXX.js   //使用另一份配置文件（比如webpack.config2.js）来打包
 </code></pre>
 
-<h3>
-<a id="配置文件webpackconfigjs" class="anchor" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6webpackconfigjs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>配置文件(webpack.config.js)</h3>
-
-<p>每个项目下都必须配置有一个 webpack.config.js</p>
-
-<ul>
-<li>plugins 插件项</li>
-<li>entry 页面入口文件配置</li>
-<li>output 对应输出项配置（即入口文件最终要生成什么名字的文件、存放到哪里）</li>
-<li>module.loaders 最关键的一块，配置每一种文件需要使用什么加载器来处理（多个loader之间用"!"连接）</li>
-</ul>
-
 <h4>
 <a id="插件的安装" class="anchor" href="#%E6%8F%92%E4%BB%B6%E7%9A%84%E5%AE%89%E8%A3%85" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>插件的安装</h4>
 
@@ -169,6 +157,18 @@ webpack --config XXX.js   //使用另一份配置文件（比如webpack.config2.
 <pre><code>npm init
 npm install url-loader --save-dev
 </code></pre>
+
+<h3>
+<a id="配置文件webpackconfigjs" class="anchor" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6webpackconfigjs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>配置文件(webpack.config.js)</h3>
+
+<p>每个项目下都必须配置有一个 webpack.config.js</p>
+
+<ul>
+<li>plugins 插件项</li>
+<li>entry 页面入口文件配置</li>
+<li>output 对应输出项配置（即入口文件最终要生成什么名字的文件、存放到哪里）</li>
+<li>module.loaders 最关键的一块，配置每一种文件需要使用什么加载器来处理（多个loader之间用"!"连接）</li>
+</ul>
 
 <h3>
 <a id="通用配置文件例子" class="anchor" href="#%E9%80%9A%E7%94%A8%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BE%8B%E5%AD%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>通用配置文件例子</h3>
@@ -296,7 +296,7 @@ img.src = require('./glyph.png');
 </code></pre>
 
 <h3>
-<a id="lesscss里import-路径问题" class="anchor" href="#lesscss%E9%87%8Cimport-%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>LESS/CSS里：<a href="https://github.com/import" class="user-mention">@import</a> 路径问题</h3>
+<a id="lesscss里-import-路径问题" class="anchor" href="#lesscss%E9%87%8C-import-%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>LESS/CSS里：@ import 路径问题</h3>
 
 <p>LESS里可以通过<code>@import mixin.less</code>进行模块化开发，可以在import的路径前面加上~，表示路径以模块处理，支持alias。</p>
 
@@ -385,6 +385,7 @@ plugins: [
         new CommonsChunkPlugin("BD-commons.js", ["B", "D"])
     ]
 };
+
 // &lt;script&gt;s required:
 // a.html: AC-commons.js, A.js
 // b.html: BD-commons.js, B.js
