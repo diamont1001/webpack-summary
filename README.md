@@ -506,6 +506,36 @@ require('lib2/proxy');
 		} catch (e) {}
 
 	})();
+	
+### 模块/组件打包 ###
+
+模块/组件一般会发布到NPM或者其他地方提供给他人使用的，这里可以使用libraryTarget字段来控制webpack打包后输出为模块/组件。
+
+```js
+// webpack.config.js
+
+module.exports = {
+    entry: {
+        pca: './src/main.js'
+    },
+    output: {
+        path: './dist',
+        filename: '[name].js',
+        libraryTarget: "umd" // 组件采用UMD格式打包
+    },
+
+    module: {
+        loaders: [
+            {
+                test: /\.js$/, loader: 'babel-loader',
+                exclude: /(node_modules|libs)/
+            }
+        ]
+    }
+};
+```
+
+这样，打包后发布到npm，别人就可以直接 `npm install xxx` 来安装后，可以 `var a = require('xxx');` 来使用了。
 
 ## 旧项目迁移方案 ##
 ### 1. 入口文件 ###
