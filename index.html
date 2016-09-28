@@ -597,6 +597,35 @@ swipe();
 })();
 </code></pre>
 
+<h3>
+<a id="模块组件打包" class="anchor" href="#%E6%A8%A1%E5%9D%97%E7%BB%84%E4%BB%B6%E6%89%93%E5%8C%85" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>模块/组件打包</h3>
+
+<p>模块/组件一般会发布到NPM或者其他地方提供给他人使用的，这里可以使用libraryTarget字段来控制webpack打包后输出为模块/组件。</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">// webpack.config.js</span>
+
+<span class="pl-c1">module</span>.<span class="pl-smi">exports</span> <span class="pl-k">=</span> {
+    entry<span class="pl-k">:</span> {
+        pca<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>./src/main.js<span class="pl-pds">'</span></span>
+    },
+    output<span class="pl-k">:</span> {
+        path<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>./dist<span class="pl-pds">'</span></span>,
+        filename<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>[name].js<span class="pl-pds">'</span></span>,
+        libraryTarget<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>umd<span class="pl-pds">"</span></span> <span class="pl-c">// 组件采用UMD格式打包</span>
+    },
+
+    module<span class="pl-k">:</span> {
+        loaders<span class="pl-k">:</span> [
+            {
+                test<span class="pl-k">:</span><span class="pl-sr"> <span class="pl-pds">/</span><span class="pl-cce">\.</span>js<span class="pl-k">$</span><span class="pl-pds">/</span></span>, loader<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>babel-loader<span class="pl-pds">'</span></span>,
+                exclude<span class="pl-k">:</span><span class="pl-sr"> <span class="pl-pds">/</span>(node_modules<span class="pl-k">|</span>libs)<span class="pl-pds">/</span></span>
+            }
+        ]
+    }
+};</pre></div>
+
+<p>这样，打包后发布到npm，别人就可以直接 <code>npm install xxx</code> 来安装后，可以 <code>var a = require('xxx');</code> 来使用了。</p>
+
 <h2>
 <a id="旧项目迁移方案" class="anchor" href="#%E6%97%A7%E9%A1%B9%E7%9B%AE%E8%BF%81%E7%A7%BB%E6%96%B9%E6%A1%88" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>旧项目迁移方案</h2>
 
