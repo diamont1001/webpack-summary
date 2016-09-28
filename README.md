@@ -480,6 +480,31 @@ require('lib2/proxy');
 
 	require('./tool/swipe.js');
 	swipe(); 
+	
+### externals ###
+externals使用场景是外部依赖不需要打包进bundle
+
+比如：你在页面里通过script标签引用了zepto：`<script src="http://cdnjs.gtimg.com/cdnjs/libs/zepto/1.1.4/zepto.min.js"></script>`，所以并不想在其他js里再打包进入一遍
+
+```js
+// webpack.config.js
+...
+{
+    externals: {
+        "zepto": "Zepto" // 引用时直接 var x = require('zepto');
+    }
+}
+```
+
+```js
+// index.js
+var $ = require('zepto');
+```
+
+编译后会这样
+```js
+var $ = window.Zepto;
+```
 
 ## Webpack模块编写 ##
 ### 模块框架 ###
@@ -508,7 +533,6 @@ require('lib2/proxy');
 	})();
 	
 ### 模块/组件打包 ###
-
 模块/组件一般会发布到NPM或者其他地方提供给他人使用的，这里可以使用libraryTarget字段来控制webpack打包后输出为模块/组件。
 
 ```js
