@@ -567,6 +567,28 @@ require('lib2/proxy');
 swipe(); 
 </code></pre>
 
+<h3>
+<a id="externals" class="anchor" href="#externals" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>externals</h3>
+
+<p>externals使用场景是外部依赖不需要打包进bundle</p>
+
+<p>比如：你在页面里通过script标签引用了zepto：<code>&lt;script src="http://cdnjs.gtimg.com/cdnjs/libs/zepto/1.1.4/zepto.min.js"&gt;&lt;/script&gt;</code>，所以并不想在其他js里再打包进入一遍</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">// webpack.config.js</span>
+<span class="pl-k">...</span>
+{
+    externals<span class="pl-k">:</span> {
+        <span class="pl-s"><span class="pl-pds">"</span>zepto<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>Zepto<span class="pl-pds">"</span></span> <span class="pl-c">// 引用时直接 var x = require('zepto');</span>
+    }
+}</pre></div>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">// index.js</span>
+<span class="pl-k">var</span> $ <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>zepto<span class="pl-pds">'</span></span>);</pre></div>
+
+<p>编译后会这样</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> $ <span class="pl-k">=</span> <span class="pl-c1">window</span>.<span class="pl-smi">Zepto</span>;</pre></div>
+
 <h2>
 <a id="webpack模块编写" class="anchor" href="#webpack%E6%A8%A1%E5%9D%97%E7%BC%96%E5%86%99" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Webpack模块编写</h2>
 
