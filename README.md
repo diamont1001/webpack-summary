@@ -588,6 +588,7 @@ module.exports = {
 
 ## 附录 ##
 - [Git官网](https://webpack.github.io/)
+- [原作者分享PPT](http://sokra.github.io/slides/webpack#1)
 - [入门指引（含例子webpack+react）](https://github.com/petehunt/webpack-howto)
 - [webpack简易教程PPT](http://slides.com/diamont1001/webpack)
 - [webpack开发原型demo](https://github.com/diamont1001/webpack-demo)
