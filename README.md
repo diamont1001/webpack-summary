@@ -523,12 +523,8 @@ var $ = window.Zepto;
 		
 			return _e;
 		})();
-
-		window.module1 = module1;
 		
-		try {
-			module.exports = module1;
-		} catch (e) {}
+		module.exports = module1
 
 	})();
 	
@@ -545,8 +541,9 @@ module.exports = {
     output: {
         path: './dist',
         filename: '[name].js',
-        libraryTarget: "umd" // 组件采用UMD格式打包
-    },
+        libraryTarget: 'umd', // 组件采用UMD格式打包
+	library: 'jUtils' // 组件库的名称，这个得写，不写的话会全部方法挂载到 window 对象的
+    },
 
     module: {
         loaders: [
@@ -560,6 +557,9 @@ module.exports = {
 ```
 
 这样，打包后发布到npm，别人就可以直接 `npm install xxx` 来安装后，可以 `var a = require('xxx');` 来使用了。
+
+当然因为使用了 'umd' 模式，所以也可以直接 <script> 引用，之后可以通过 `jUtils` 来引用，`jUtils` 是配置的 `output.library` 里指定的；
+
 
 ## 旧项目迁移方案 ##
 ### 1. 入口文件 ###
