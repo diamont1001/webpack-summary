@@ -1,0 +1,8 @@
+title: Webpack-summary
+description: webpack的学习总结
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-cayman
+
+gems:
+  - jekyll-mentions
